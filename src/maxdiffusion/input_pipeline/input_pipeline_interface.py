@@ -77,6 +77,7 @@ def make_laion400m_train_iterator(
       .shuffle(global_batch_size * 10)
       .batch(global_batch_size)
       .prefetch(AUTOTUNE)
+      .repeat(100000000)
   )
 
   train_ds = train_ds.shard(num_shards = jax.process_count(), index = jax.process_index())
